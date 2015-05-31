@@ -1,0 +1,5 @@
+= desktop-config
+
+== Powerline shell
+
+https://github.com/lukasz-kusek/powerline-shell
