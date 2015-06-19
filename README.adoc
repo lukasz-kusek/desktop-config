@@ -1,5 +1,15 @@
 = desktop-config
 
-== Powerline shell
-
 https://github.com/lukasz-kusek/powerline-shell
+
+https://github.com/coldfix/udiskie
+
+https://github.com/sandeel/i3-new-workspace
+
+https://github.com/proxypoke/quickswitch-for-i3
+
+https://github.com/enkore/j4-dmenu-desktop
+
+https://github.com/acrisci/playerctl
+
+https://github.com/Bumblebee-Project/bumblebee-ui
