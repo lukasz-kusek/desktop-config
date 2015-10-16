@@ -4,8 +4,8 @@ set $IDEA 3: Intellij IDEA
 
 assign [class="Thunderbird"] $MAIL
 for_window [class="Thunderbird"] focus
-assign [class="Chromium|Dwb|Firefox|Uzbl-core|Google-chrome"] $WWW
-for_window [class="Chromium|Dwb|Firefox|Uzbl-core|Google-chrome"] focus
+assign [class="Chromium|Dwb|Firefox|Uzbl-core|google-chrome"] $WWW
+for_window [class="Chromium|Dwb|Firefox|Uzbl-core|google-chrome"] focus
 assign [class="jetbrains-idea"] $IDEA
 for_window [class="jetbrains-idea"] focus
 
