@@ -1,0 +1,141 @@
+set $MAIL 1: Mail
+set $WWW 2: WWW
+set $IDEA 3: Intellij IDEA
+
+assign [class="Thunderbird"] $MAIL
+for_window [class="Thunderbird"] focus
+assign [class="Chromium|Dwb|Firefox|Uzbl-core|google-chrome"] $WWW
+for_window [class="Chromium|Dwb|Firefox|Uzbl-core|google-chrome"] focus
+assign [class="jetbrains-idea"] $IDEA
+for_window [class="jetbrains-idea"] focus
+
+set $mod Mod4
+
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+floating_modifier $mod
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+
+bindsym XF86TouchpadToggle exec ~/App/toggle-touchpad.sh
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym $mod+p exec ~/App/quickswitch.py
+
+bindsym $mod+Shift+Tab exec dm-tool switch-to-greeter
+
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym $mod+Shift+Return exec ~/App/i3-new-workspace
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+bindsym $mod+d exec j4-dmenu-desktop
+bindsym $mod+Shift+d exec dmenu_run
+
+bindsym $mod+o exec i3lock -i ~/.i3/background.png -p default -d -n
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+a split h
+bindsym $mod+Shift+s split v
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+a focus parent
+
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace $MAIL
+bindsym $mod+2 workspace $WWW
+bindsym $mod+3 workspace $IDEA
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+bindsym $mod+Shift+1 move container to workspace $MAIL
+bindsym $mod+Shift+2 move container to workspace $WWW
+bindsym $mod+Shift+3 move container to workspace $IDEA
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# switch between the current and the previously focused one
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth
+
+# workspace <next|prev|next_on_output|prev_on_output>
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit?' -b 'Yes' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bar {
+    colors {
+        statusline #ADD8E6
+    }
+    status_command conky -c ~/.i3/conkyrc
+}
+
+exec --no-startup-id feh --bg-scale ~/.i3/background.png
+
+exec --no-startup-id i3-msg "workspace $WWW; layout tabbed"
+exec --no-startup-id i3-msg "workspace $IDEA; layout tabbed"
+
+exec --no-startup-id i3-msg 'exec ~/App/desktop-open.sh /usr/share/applications/thunderbird.desktop'
+exec --no-startup-id i3-msg 'exec ~/App/desktop-open.sh /usr/share/applications/google-chrome.desktop'
+exec --no-startup-id i3-msg 'exec ~/App/desktop-open.sh /usr/share/applications/jetbrains-idea.desktop'
+exec --no-startup-id i3-msg 'exec ~/App/desktop-open.sh /usr/share/applications/bumblebee-indicator.desktop'
+
+exec --no-startup-id i3-msg 'exec dunst -config ~/.i3/dunstrc'
+exec --no-startup-id i3-msg 'exec ~/App/udiskie --tray'
+exec --no-startup-id i3-msg 'exec parcellite'
+
+exec --no-startup-id i3-msg 'exec synclient TouchpadOff=1'
+exec --no-startup-id i3-msg 'exec nm-applet'
